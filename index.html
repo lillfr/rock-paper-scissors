@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice() {
+            let x = Math.random()*30;
+            if (x <= 10) {
+                return "Rock";
+            } else if (x <= 20) {
+                return "Paper";
+            } else {
+                return "Scissors";
+            }
+        }
+        function getHumanChoice() {
+            let answer = prompt("enter value (paper, rock or scissors): ");
+            return answer;
+        }
+        let humanScore = 0;
+        let computerScore = 0;
+        function playRound(humanChoice, computerChoice) {
+            humanChoice = humanChoice.toLowerCase();
+            computerChoice = computerChoice.toLowerCase();
+            let message = "";
+            if (humanChoice == computerChoice) {
+                message += "Draw!";
+            } else if (humanChoice == "paper") {
+                if (computerChoice == "rock") {
+                    message += "You win! Paper beats rock.";
+                    humanScore++;
+                } else {
+                    message += "You lose! Scissors beats paper.";
+                    computerScore++;
+                }
+            } else if (humanChoice == "rock") {
+                if (computerChoice == "scissors") {
+                    message += "You win! Rock beats scissors.";
+                    humanScore++;
+                } else {
+                    message += "You lose! Paper beats rock."
+                    computerScore++;
+                }
+            } else if (humanChoice == "scissors") {
+                if (computerChoice == "paper") {
+                    message += "You win! Scissors beats paper.";
+                    humanScore++;
+                } else {
+                    message += "You lose! Rock beats scissors.";
+                    computerScore++;
+                }
+            }
+            message += ` Your score: ${humanScore}, computer score: ${computerScore}`;
+            console.log(message);
+        }
+        function playGame() {
+            for (i = 0; i<5; i++) {
+                const humanSelection = getHumanChoice();
+                const computerSelection = getComputerChoice();
+                playRound(humanSelection, computerSelection);
+            }
+            if (humanScore == computerScore) {
+                console.log("Draw!")
+            } else if (humanScore > computerScore) {
+                console.log("Congratulations! You win the game!");
+            } else {
+                console.log("You a loser!")
+            }
+        }
+        playGame();
+    </script>
+</body>
+</html>
